@@ -1,0 +1,8 @@
+/* font converted using font-converter.net. thank you! */
+@font-face {
+  font-family: 'GeosansLight-NMS';
+  src: url('./assets/fonts/geonms-font.woff') format('woff'),
+    /* Modern Browsers */ url('./assets/fonts/geonms-font.woff2') format('woff2'); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
