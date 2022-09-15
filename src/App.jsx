@@ -8,12 +8,7 @@ function App() {
 
   // Do these need to be declared here?
   // No, no they do not but I think it's more readable.
-  const base1 = '#a60000';
-  const base2 = '#a600a6';
-  const base3 = '#00a600';
-  const base4 = '#00a6a6';
-  const base5 = '#0000a6';
-  const base6 = '#000000';
+  const baseColors = ['#a60000', '#a600a6', '#00a600', '#00a6a6', '#0000a6', '#000000'];
 
   return (
     <div className="app">
@@ -22,12 +17,30 @@ function App() {
         <p>The current base color code is {baseColor}.</p>
         <p>Select a different base color below.</p>
         <div className="color-selections">
-          <ColorSelector colorCode={base1} setBaseColorHandler={setBaseColor} textColor="#ffffff" />
-          <ColorSelector colorCode={base2} setBaseColorHandler={setBaseColor} textColor="#ffffff" />
-          <ColorSelector colorCode={base3} setBaseColorHandler={setBaseColor} />
-          <ColorSelector colorCode={base4} setBaseColorHandler={setBaseColor} />
-          <ColorSelector colorCode={base5} setBaseColorHandler={setBaseColor} textColor="#ffffff" />
-          <ColorSelector colorCode={base6} setBaseColorHandler={setBaseColor} textColor="#ffffff" />
+          {
+            // Overengineered for practice :)
+            baseColors.map((base) => {
+              if (base !== '#00a600' && base !== '#00a6a6') {
+                return (
+                  <ColorSelector
+                    key={base + Math.random()}
+                    colorCode={base}
+                    setBaseColorHandler={setBaseColor}
+                    textColor="#ffffff"
+                  />
+                );
+              } else {
+                return (
+                  <ColorSelector
+                    key={base + Math.random()}
+                    colorCode={base}
+                    setBaseColorHandler={setBaseColor}
+                    textColor="#000000"
+                  />
+                );
+              }
+            })
+          }
         </div>
       </div>
     </div>
