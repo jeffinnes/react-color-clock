@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import classes from './ClockFace.module.css';
 
-function ClockFace({ baseColor }) {
+function ClockFace({ newBaseColor }) {
   const [hexTime, setHexTime] = useState('');
   const [hexColor, setHexColor] = useState('');
   const [textColor, setTextColor] = useState('');
@@ -57,7 +57,7 @@ function ClockFace({ baseColor }) {
     }
   }
 
-  function getHexTime() {
+  function getHexTime(baseColor) {
     // Get the time and set segments
     const now = new Date(Date.now());
     let hour = `${now.getHours()}`;
@@ -104,10 +104,14 @@ function ClockFace({ baseColor }) {
 
   useEffect(() => {
     const refreshInterval = setInterval(() => {
-      getHexTime();
+      getHexTime(newBaseColor);
     }, 500);
     return () => clearInterval(refreshInterval);
   });
+
+  useEffect(() => {
+    getHexTime(newBaseColor);
+  }, [newBaseColor]);
 
   return (
     <div className={classes.clock} style={{ backgroundColor: hexColor, color: textColor }}>
