@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="app">
-      <ClockFace newBaseColor={baseColor} />
+      <ClockFace baseColor={baseColor} />
       <div className="userInput">
         <p>The current base color code is {baseColor}.</p>
         <p>Select a different base color below.</p>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import classes from './ClockFace.module.css';
 
-function ClockFace({ newBaseColor }) {
+function ClockFace({ baseColor }) {
   const [hexTime, setHexTime] = useState('');
   const [hexColor, setHexColor] = useState('');
   const [textColor, setTextColor] = useState('');
@@ -57,16 +57,16 @@ function ClockFace({ newBaseColor }) {
     }
   }
 
-  function getHexTime(baseColor) {
+  function getHexTime(hexCode) {
     // Get the time and set segments
     const now = new Date(Date.now());
     let hour = `${now.getHours()}`;
     let minute = `${now.getMinutes()}`;
     let second = `${now.getSeconds()}`;
 
-    const baseHour = baseColor.slice(1, 3);
-    const baseMinute = baseColor.slice(3, 5);
-    const baseSecond = baseColor.slice(5, 7);
+    const baseHour = hexCode.slice(1, 3);
+    const baseMinute = hexCode.slice(3, 5);
+    const baseSecond = hexCode.slice(5, 7);
 
     let shiftedHour = hexAdd(hour, baseHour);
     let shiftedMinute = hexAdd(minute, baseMinute);
@@ -104,14 +104,14 @@ function ClockFace({ newBaseColor }) {
 
   useEffect(() => {
     const refreshInterval = setInterval(() => {
-      getHexTime(newBaseColor);
+      getHexTime(baseColor);
     }, 500);
     return () => clearInterval(refreshInterval);
   });
 
   useEffect(() => {
-    getHexTime(newBaseColor);
-  }, [newBaseColor]);
+    getHexTime(baseColor);
+  }, [baseColor]);
 
   return (
     <div className={classes.clock} style={{ backgroundColor: hexColor, color: textColor }}>
